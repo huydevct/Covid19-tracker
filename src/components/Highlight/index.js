@@ -25,7 +25,7 @@ export default function Highlight({ report }) {
   return (
     <Grid container spacing={3}>
       {summary.map((item) => (
-        <Grid item sm={4} xs={12}>
+        <Grid item sm={4} xs={12} key={item.type}>
           <HighlightCard
             title={item.title}
             count={item.count}

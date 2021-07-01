@@ -5,7 +5,7 @@ import moment from "moment";
 import { ButtonGroup, Button } from "@material-ui/core";
 
 const generateOptions = (data) => {
-  const categories = data.map(item => moment(item.Date).format('DD/MM/YYYY'));
+  const categories = data.map((item) => moment(item.Date).format("DD/MM/YYYY"));
 
   return {
     chart: {
@@ -52,21 +52,59 @@ const generateOptions = (data) => {
   };
 };
 
-export default function LineChart({ data }) {
+const  LineChart = ({ data }) => {
   const [options, setOptions] = useState({});
+  const [reportType, setReportType] = useState("all");
 
   useEffect(() => {
-    setOptions(generateOptions(data));
-  }, [data]);
+    let customData = [];
+
+    switch (reportType) {
+      case "all":
+        customData = data;
+        break;
+      case "30":
+        customData = data.slice(data.length - 30);
+        break;
+      case "7":
+        customData = data.slice(data.length - 7);
+        break;
+      default:
+        customData = data;
+        break;
+    }
+    setOptions(generateOptions(customData));
+  }, [data, reportType]);
 
   return (
     <div>
-        <ButtonGroup size='small' style={{ display: 'flex', justifyContent: 'flex-end'}}>
-            <Button>Tất Cả</Button>
-            <Button>30 ngày</Button>
-            <Button>7 ngày</Button>
-        </ButtonGroup>
+      <ButtonGroup
+        size="small"
+        style={{ display: "flex", justifyContent: "flex-end" }}
+      >
+        <Button
+          color={reportType === "all" ? "secondary" : ""}
+          onClick={() => setReportType("all")}
+        >
+          Tất Cả
+        </Button>
+        <Button
+          color={reportType === "30" ? "secondary" : ""}
+          onClick={() => setReportType("30")}
+        >
+          30 ngày
+        </Button>
+        <Button
+          color={reportType === "7" ? "secondary" : ""}
+          onClick={() => setReportType("7")}
+        >
+          7 ngày
+        </Button>
+      </ButtonGroup>
       <HighchartsReact highcharts={Highchart} options={options} />
     </div>
   );
 }
+
+
+export default React.memo(LineChart);
