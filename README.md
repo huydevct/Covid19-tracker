@@ -1,5 +1,5 @@
 # COVID19-tracked web-app
 
-Link to web: https://huydevct.github.io/Covid19-tracked/
+Link to web: https://covid19-tracker-prac.netlify.app/
 
 My practice web to learn ReactJS

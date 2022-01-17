@@ -1,11 +1,18 @@
 import React from "react";
-import { FormControl, InputLabel, NativeSelect, FormHelperText, makeStyles } from "@material-ui/core";
+import {
+  FormControl,
+  InputLabel,
+  NativeSelect,
+  FormHelperText,
+  makeStyles,
+} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   FormControl: {
     margin: `${theme.spacing(3)}px 0`,
-  }
-}))
+  },
+}));
+
 export default function CountrySelector({ value, handleOnChange, countries }) {
   const styles = useStyles();
 
